@@ -1,0 +1,13 @@
+server:
+  port: 8090
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url:  jdbc:mysql://localhost:3306/vueblog?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+

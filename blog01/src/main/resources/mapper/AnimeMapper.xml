@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybaits.org//DTD Mapper 3.0//EN"
+        "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AnimeMapper">
+    <select id="getallanime" resultType="com.example.pojo.Anime">
+        select * from anime
+    </select>
+
+</mapper>

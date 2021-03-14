@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybaits.org//DTD Mapper 3.0//EN"
+        "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BlogMapper">
+    <select id="selectBlogs" resultMap="Blogs2Tags">
+        SELECT b.`id` as bid,`title`,`summary`,`update_time`,`number`,
+        `create_time`,`read_time`,`picture`,`name`,t.`id` as tid
+        FROM blog b
+        INNER JOIN blog2tag bt
+        ON b.id = bt.`blogid`
+        INNER JOIN tag t
+        ON t.id = bt.`tagid`
+    </select>
+
+    <resultMap id="Blogs2Tags" type="com.example.pojo.Blog">
+        <result property="title" column="title"></result>
+        <result property="id" column="bid"></result>
+        <result property="summary" column="summary"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="number" column="number"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="readTime" column="read_time"></result>
+        <result property="picture" column="picture"></result>
+        <collection property="tags" ofType="com.example.pojo.Tag" >
+            <result property="name" column="name"></result>
+            <result property="id" column="tid"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectBlogDate" resultType="Date">
+        select `create_time` from blog
+    </select>
+
+
+    <select id="selectBlogsCategroy" parameterType="string" resultType="com.example.pojo.Blog">
+        select * from blog where create_time like #{year}
+    </select>
+</mapper>
