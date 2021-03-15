@@ -26,6 +26,11 @@ name: "Header",
   },
   methods:{
   },
+  data(){
+  return{
+
+  }
+  }
 
 }
 </script>

@@ -10,4 +10,16 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.pojo
+
+#  jjwt 配置
+jwt:
+#  JWT存储请求头
+  tokenHeader: Authorization
+#  加密秘钥
+  secret: yeb-secret
+#  jwt超时
+  expiration: 604800
+#
+  tokenHead: Bearer
 

@@ -9,4 +9,24 @@ public class ResultMap {
         resultMap.put("data",data);
         return resultMap;
     }
+
+    // 成功 返回
+    public static Map returnResult(Object data,String message,int code){
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("data",data);
+        resultMap.put("message",message);
+        resultMap.put("code",code);
+        return resultMap;
+    }
+
+    // 成功 返回 200
+    public static Map returnResult(Object data,String message){
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("data",data);
+        resultMap.put("message",message);
+        resultMap.put("code",200);
+        return resultMap;
+    }
+
+
 }

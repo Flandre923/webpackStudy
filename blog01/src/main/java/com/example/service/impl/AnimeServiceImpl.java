@@ -18,4 +18,5 @@ public class AnimeServiceImpl implements AnimeService {
         List<Anime> getallanime = animeMapper.getallanime();
         return getallanime;
     }
+
 }

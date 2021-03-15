@@ -22,7 +22,7 @@ public class BlogController {
     @RequestMapping("/blog/tags")
     public Map getTags(){
         List<Tag> tags = tagService.getTags();
-        System.out.println(tags);
+//        System.out.println(tags);
         Map map = ResultMap.returnResult(tags);
         return map;
     }
