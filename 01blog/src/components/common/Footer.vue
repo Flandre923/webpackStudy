@@ -4,9 +4,10 @@
       <div class="flex divide-x space-x-4">
         <div class="w-1/2 flex items-center justify-center flex-wrap mb-2">
           <div class="text-gray-300 w-full text-center mb-2">最新文章</div>
-          <div class="text-gray-400">Redis+定时任务实现访客标识及统计PV、UV</div>
-          <div class="text-gray-400">Redis+定时任务实现访客标识及统计PV、UV</div>
-          <div class="text-gray-400">Redis+定时任务实现访客标识及统计PV、UV</div>
+          <div class="text-center">
+          <button class="text-gray-400 w-full" v-for="blog in blogs" :key="blog.id" @click="$router.push('/blog/'+blog.id)">{{blog.title}}</button>
+          </div>
+
         </div>
         <div class="w-1/2">
            <div class="flex justify-center">
@@ -35,8 +36,22 @@
 </template>
 
 <script>
+import {getBlogs} from "../../api/home/home";
+
 export default {
-  name: "Footer"
+  name: "Footer",
+  data(){
+    return{
+        blogs:null,
+    }
+  },
+  created() {
+    getBlogs().then(res=>{
+      console.log(res.data);
+      this.blogs = res.data;
+      this.blogs = this.blogs.slice(0,3)
+    })
+  }
 }
 </script>
 

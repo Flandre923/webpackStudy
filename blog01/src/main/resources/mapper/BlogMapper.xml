@@ -3,6 +3,7 @@
         PUBLIC "-//mybaits.org//DTD Mapper 3.0//EN"
         "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.BlogMapper">
+<!--    查询所有的blog-->
     <select id="selectBlogs" resultMap="Blogs2Tags">
         SELECT b.`id` as bid,`title`,`summary`,`update_time`,`number`,
         `create_time`,`read_time`,`picture`,`name`,t.`id` as tid
@@ -11,7 +12,69 @@
         ON b.id = bt.`blogid`
         INNER JOIN tag t
         ON t.id = bt.`tagid`
+        order by `create_time` desc
     </select>
+<!--    查询blog的时间-->
+    <select id="selectBlogDate" resultType="Date">
+        select `create_time` from blog
+    </select>
+<!--    按年份分类查询-->
+    <select id="selectBlogsCategroy" parameterType="string" resultType="com.example.pojo.Blog">
+        select * from blog where create_time like #{year}
+    </select>
+<!--    通过id查询-->
+    <select id="selectBlogById" parameterType="int" resultMap="Blogs2Tags2">
+        SELECT b.`id` AS bid,`title`,`summary`,`update_time`,`number`,`content`,
+        `create_time`,`read_time`,`picture`,`name`,t.`id` AS tid
+        FROM blog b
+        INNER JOIN blog2tag bt
+        ON b.id = bt.`blogid`
+        INNER JOIN tag t
+        ON t.id = bt.`tagid`
+        WHERE b.id = #{id}
+    </select>
+<!--通过tagid和blog查询他们的关系是否存在-->
+    <select id="selectBlog2TagByTagId" parameterType="map" resultMap="Blog2TagByTagIDAndBlogId">
+        SELECT `id`,`blogid`,`tagid`
+        FROM `blog2tag`
+        WHERE `tagid`=#{tagid}
+        AND `blogid`=#{blogid}
+    </select>
+<!--    通过tagid和blogid和blog2tagid修改blog2tag表-->
+    <update id="updateBlog2Tag" parameterType="map">
+        UPDATE `blog2tag` SET `blogid`=#{blogid},`tagid`=#{tagid} WHERE `id`=#{blog2tagid}
+    </update>
+<!-- 插入数据-->
+    <insert id="insertBlog2Tag" parameterType="map">
+        INSERT INTO `blog2tag`(`blogid`,`tagid`)
+        VALUE (#{blogid},#{tagid})
+    </insert>
+<!--    通过blogid查询该blog与tag的关系-->
+    <select id="selectTagList" parameterType="int" resultMap="selectBlog2TagList">
+        SELECT `blogid`,`tagid`,`id`
+        FROM blog2tag
+        WHERE blogid=#{id}
+    </select>
+<!--    通过id删除-->
+    <delete id="removeBlog2Tag" parameterType="int">
+        delete from blog2tag where id=#{id}
+    </delete>
+<!--    通过id删除blog和tag的关联-->
+    <delete id="deleteBlog2Tag" parameterType="int">
+        delete from blog2tag where blogid=#{id}
+    </delete>
+
+    <resultMap id="selectBlog2TagList" type="com.example.pojo.BlogToTag">
+        <result property="blogid" column="blogid"></result>
+        <collection property="list" ofType="com.example.pojo.TagIdAndTagToBlogID">
+            <result property="id" column="id"></result>
+            <result property="tagid" column="tagid"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="Blog2TagByTagIDAndBlogId" type="map">
+        <result property="id" column="id"></result>
+    </resultMap>
 
     <resultMap id="Blogs2Tags" type="com.example.pojo.Blog">
         <result property="title" column="title"></result>
@@ -28,12 +91,22 @@
         </collection>
     </resultMap>
 
-    <select id="selectBlogDate" resultType="Date">
-        select `create_time` from blog
-    </select>
+    <resultMap id="Blogs2Tags2" type="com.example.pojo.Blog">
+        <result property="title" column="title"></result>
+        <result property="content" column="content"></result>
+        <result property="id" column="bid"></result>
+        <result property="summary" column="summary"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="number" column="number"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="readTime" column="read_time"></result>
+        <result property="picture" column="picture"></result>
+        <collection property="tags" ofType="com.example.pojo.Tag" >
+            <result property="name" column="name"></result>
+            <result property="id" column="tid"></result>
+        </collection>
+    </resultMap>
 
 
-    <select id="selectBlogsCategroy" parameterType="string" resultType="com.example.pojo.Blog">
-        select * from blog where create_time like #{year}
-    </select>
+
 </mapper>

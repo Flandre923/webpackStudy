@@ -1,11 +1,10 @@
 <template>
   <div class="h-16 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200">
     <div class="header container mx-auto flex items-center h-full shadow-xl">
-      <img src="" alt="Flandre'blog" class="mr-auto"/>
       <item url="/home">首页</item>
       <item url="/blog">博客</item>
       <item url="/anime">番剧</item>
-      <item url="/photo">摄影</item>
+      <item url="/photo">图片</item>
       <item url="/friends">友人帐</item>
       <item url="/about">关于我</item>
       <search-item></search-item>

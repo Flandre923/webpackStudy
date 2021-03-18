@@ -3,8 +3,8 @@
     <mu-paper :z-depth="1">
       <mu-data-table :columns="columns" @sort-change="handleSortChange" :data="list">
           <template slot-scope="scope">
-            <td @click="a">{{scope.row.title}}</td>
-            <td class="is-center" @click="a">{{scope.row.createtime}}</td>
+            <td @click="blogclick(scope.row)">{{scope.row.title}}</td>
+            <td class="is-center" @click="blogclick(scope.row)">{{scope.row.createtime}}</td>
           </template>
       </mu-data-table>
     </mu-paper>
@@ -38,16 +38,17 @@ export default {
     },
     handledata(){
       for(let data of this.cateblog.blogs){
-        console.log(data),
         this.list.push({
+          id:data.id,
           title: data.title,
           summary: data.summary,
           createtime: timefomat(data.createTime)
         })
       }
     },
-    a(){
-      console.log('123')
+    blogclick(blog){
+      console.log(blog)
+      this.$router.push("/blog/"+blog.id)
     }
   },
   created() {

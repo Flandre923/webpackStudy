@@ -19,7 +19,7 @@ import java.io.IOException;
 public class JwtAuthencationTokenFilter extends OncePerRequestFilter {
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
-    @Value("${jwt.tokenhead}")
+    @Value("${jwt.tokenHead}")
     private String tokenHead;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -36,7 +36,7 @@ public class JwtAuthencationTokenFilter extends OncePerRequestFilter {
                 //登录
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 //验证token是否有效
-                if(jwtTokenUtil.validateToken(tokenHead,userDetails)){
+                if(jwtTokenUtil.validateToken(authToken,userDetails)){
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);

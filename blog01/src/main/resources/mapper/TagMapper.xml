@@ -7,4 +7,14 @@
         select * from tag
     </select>
 
+    <delete id="deleteBlog2Tag" parameterType="int">
+            DELETE FROM blog2tag WHERE `tagid`=#{id}
+    </delete>
+
+    <select id="selectBlogbyTagId" parameterType="int" resultType="int">
+        SELECT `blogid`
+        FROM `blog2tag`
+        WHERE `tagid`=#{id}
+    </select>
+
 </mapper>

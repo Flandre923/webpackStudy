@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.pojo.Blog;
 import com.example.pojo.Tag;
 import com.example.service.BlogService;
 import com.example.service.TagService;
@@ -19,6 +20,10 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
+    /**
+     * 获得所有分类
+     * @return
+     */
     @RequestMapping("/blog/tags")
     public Map getTags(){
         List<Tag> tags = tagService.getTags();
@@ -27,10 +32,21 @@ public class BlogController {
         return map;
     }
 
+    /**
+     * 获得关于所有的blog的年份和相应的分类
+     * @return
+     */
     @RequestMapping("/blog/artdate")
     public Map getArtsDate(){
         List<Map> blogDate = blogService.getBlogDate();
         return ResultMap.returnResult(blogDate);
     }
+
+    @RequestMapping("/blog/content")
+    public Map getBlogContent(int id){
+        Blog blog = blogService.selectBlogOneById(id);
+        return ResultMap.returnResult(blog,"message",200);
+    }
+
 
 }

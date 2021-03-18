@@ -10,3 +10,12 @@ export function get_blogs_date(){
         url:'/blog/artdate'
     })
 }
+
+
+export function submit_blogs(blog){
+    return request({
+        url:'/admin/blog',
+        method:'post',
+        data:blog
+    })
+}

@@ -1,13 +1,24 @@
 <template>
-  <div class="flex">
-    <div class="mr-3 text-pink-600">搜索:</div>
-    <input type="text">
+  <div class="flex items-center justify-center">
+    <mu-text-field v-model="input" label-width="3" help-text="搜索..."></mu-text-field>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SearchItem"
+  name: "SearchItem",
+  data(){
+    return{
+      input:null
+    }
+  },
+  components:{
+  },
+  methods:{
+  },
+  computed:{
+
+  }
 }
 </script>
 

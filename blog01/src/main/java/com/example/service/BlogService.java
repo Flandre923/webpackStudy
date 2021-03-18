@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.pojo.Blog;
 import org.springframework.stereotype.Service;
 
@@ -12,4 +13,13 @@ public interface BlogService {
 
     public List<Map> getBlogDate();
 
+    public Page selectBlogByPage(Map map);
+
+    public Blog  selectBlogOneById(int id);
+
+    public int updateBlog(Blog blog,List list);
+
+    public int insertBlog(Blog blogt, List list);
+
+    public int deteleBlogById(int id);
 }

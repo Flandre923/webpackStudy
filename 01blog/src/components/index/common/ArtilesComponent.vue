@@ -11,13 +11,20 @@
       {{artiles.summary}}
     </p>
     <div class="divide-black divide-y">
-      <div class="flex items-center justify-center">
-        <button class="w-1/4 text-center rounded
-              bg-gradient-to-r from-blue-500 divide-purple-600
-             to-pink-500 text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">阅读全文</button>
-      </div>
+      <router-link :to="{path:'/blog/'+artiles.id}">
+        <div class="flex items-center justify-center">
+          <button class="w-1/4 text-center rounded
+                bg-gradient-to-r from-blue-500 divide-purple-600
+               to-pink-500 text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">阅读全文</button>
+        </div>
+      </router-link>
       <div class="flex space-x-4 mt-4">
-        <div class="bg-red-300 border rounded-l-xl px-2 mt-4" v-for="(tag,index) in artiles.tags" :key="index">{{ tag.name }}</div>
+          <div class="bg-red-300 border rounded-l-xl px-2 mt-4" v-for="(tag,index) in artiles.tags" :key="index">
+            <router-link :to="{path:'/search/tag'+tag.id}">
+            {{ tag.name }}
+            </router-link>
+          </div>
+
       </div>
     </div>
   </div>

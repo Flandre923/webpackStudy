@@ -14,7 +14,7 @@ import java.util.Map;
 public class HomeController {
     @Autowired
     BlogService blogService;
-    @RequestMapping("/")
+    @RequestMapping("/index")
     public Map home(){
         List<Blog> blogs = blogService.getBlogs();
         Map<String,Object> blogMap = new HashMap<>();

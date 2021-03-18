@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Index from '../views/Index'
 import Loign from '../views/admin/Login'
 import {index_routes_children} from  './routes'
+import {admin_routes} from  './adminroutes'
+const AdminIndex = () => import("../views/admin/index/AdminIndex")
+const AdminHome = () => import("../views/admin/Home/AdminHome")
 
 Vue.use(VueRouter)
 const routes = [
@@ -13,9 +16,14 @@ const routes = [
     children:index_routes_children
   },
   {
-    path:'/admin',
+    path:'/login',
     component:Loign,
-    children:[]
+  },
+  {
+    path:'/admin',
+    component:AdminIndex,
+    redirect:'/admin/home',
+    children:admin_routes
   },
 ]
 

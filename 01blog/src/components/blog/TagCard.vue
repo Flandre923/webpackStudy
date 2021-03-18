@@ -4,7 +4,9 @@
       <mu-card-title title="文章标签" sub-title="Blog's tags"></mu-card-title>
       <mu-card-text>
         <mu-container class="">
-          <tag-item class="mb-2 mr-3" v-for="(tag,index) in tags" :key="index">{{ tag.name }}</tag-item>
+          <tag-item class="mb-2 mr-3" v-for="(tag,index) in tags" :key="index" :tag="tag">
+            {{ tag.name }}
+          </tag-item>
         </mu-container>
       </mu-card-text>
     </mu-card>
@@ -17,6 +19,9 @@ export default {
   name: "TagCard",
   components:{
     TagItem
+  },
+  methods:{
+
   },
   props:{
     tags:{}

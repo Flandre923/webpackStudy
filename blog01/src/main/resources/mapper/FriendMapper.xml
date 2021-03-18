@@ -3,7 +3,7 @@
         PUBLIC "-//mybaits.org//DTD Mapper 3.0//EN"
         "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.FriendsMapper">
-    <select id="getFriends" resultType="com.example.pojo.Friends">
+    <select id="getFriends" resultType="com.example.pojo.Friend">
         select * from friend
     </select>
 

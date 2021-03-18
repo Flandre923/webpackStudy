@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.pojo.Friends;
+import com.example.pojo.Friend;
 import com.example.service.FriendService;
 import com.example.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class FriendController {
     FriendService friendService;
     @RequestMapping("/friends/fri")
     public Map getfriends(){
-        List<Friends> friend = friendService.getFriend();
+        List<Friend> friend = friendService.getFriend();
         return ResultMap.returnResult(friend);
     }
 }

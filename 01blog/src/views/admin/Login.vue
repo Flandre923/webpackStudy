@@ -54,7 +54,11 @@ name: "Login",
     if(this.password_error===false && this.username_error===false){
       console.log(this.user);
       login(this.user).then(res=>{
-        console.log(res)
+        if(res.data!==null){
+          const tokenStr = res.data.tokenHead + res.data.token
+          window.sessionStorage['tokenStr']=tokenStr
+          this.$router.push("/admin")
+        }
       })
     }
 

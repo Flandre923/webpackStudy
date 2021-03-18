@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RestfulAccessDenieHandler restfulAccessDenieHandler;
 
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
@@ -41,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login",
                         "/logout","/anime/anime",
                         "/blog/tags","/blog/artdate",
-                        "/friends/fri","/")
+                        "/friends/fri","/index","/blog/**","/search/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
