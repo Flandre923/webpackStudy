@@ -1,0 +1,59 @@
+### 后段内容不提交的事 ###
+/blog01/HELP.md
+/blog01/target/
+!/blog01/.mvn/wrapper/maven-wrapper.jar
+!/blog01/**/src/main/**/target/
+!/blog01/**/src/test/**/target/
+### STS ###
+/blog01/.apt_generated
+/blog01/.classpath
+/blog01/.factorypath
+/blog01/.project
+/blog01/.settings
+/blog01/.springBeans
+/blog01/.sts4-cache
+### IntelliJ IDEA ###
+/blog01/.idea
+/blog01/*.iws
+/blog01/*.iml
+/blog01/*.ipr
+### NetBeans ###
+/blog01/nbproject/private/
+/blog01/nbbuild/
+/blog01/dist/
+/blog01/nbdist/
+/blog01/.nb-gradle/
+/blog01/build/
+!/blog01/**/src/main/**/build/
+!/blog01/**/src/test/**/build/
+
+### VS Code ###
+/blog01/.vscode/
+
+
+### 前端不用提交的内容 ###
+/01blog/.DS_Store
+/01blog/node_modules
+/01blog/dist
+
+
+# local env files
+/01blog/.env.local
+/01blog/.env.*.local
+
+# Log files
+/01blog/npm-debug.log*
+/01blog/yarn-debug.log*
+/01blog/yarn-error.log*
+/01blog/pnpm-debug.log*
+
+# Editor directories and files
+/01blog/.idea
+/01blog/.vscode
+/01blog/*.suo
+/01blog/*.ntvs*
+/01blog/*.njsproj
+/01blog/*.sln
+/01blog/*.sw?
+
+
