@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.pojo.Blog;
+import com.example.pojo.params.PageSizeCurrent;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface BlogService {
-    public List<Blog> getBlogs();
+    public Page getBlogs(PageSizeCurrent page);
 
     public List<Map> getBlogDate();
 

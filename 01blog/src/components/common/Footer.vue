@@ -46,10 +46,9 @@ export default {
     }
   },
   created() {
-    getBlogs().then(res=>{
-      console.log(res.data);
-      this.blogs = res.data;
-      this.blogs = this.blogs.slice(0,3)
+    getBlogs({page_size:null,current:null}).then(res=>{
+      console.log(res.data.data);
+      this.blogs = res.data.data;
     })
   }
 }

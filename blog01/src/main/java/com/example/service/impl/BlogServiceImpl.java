@@ -1,11 +1,13 @@
 package com.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mapper.BlogMapper;
 import com.example.pojo.Blog;
 import com.example.pojo.BlogToTag;
 import com.example.pojo.Tag;
 import com.example.pojo.TagIdAndTagToBlogID;
+import com.example.pojo.params.PageSizeCurrent;
 import com.example.service.BlogService;
 import com.example.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,30 @@ public class BlogServiceImpl implements BlogService {
      * @return
      */
     @Override
-    public List<Blog> getBlogs() {
-        List<Blog> blogs1 = blogMapper.selectBlogs();
-        return blogs1;
+    public Page getBlogs(PageSizeCurrent page) {
+        int current=0,size=0;
+        if(page != null && page.getCurrent()!= null
+                && page.getPage_size()!= null
+                && page.getPage_size() > 0 && page.getCurrent()>0){
+            current = page.getCurrent();
+            size = page.getPage_size();
+        }else{
+            if(page==null || page.getCurrent() == null || page.getPage_size() ==null){
+                QueryWrapper qw = new QueryWrapper();
+                qw.orderByDesc("create_time");
+                System.out.println("============page===========");
+                Page<Blog> footerblogs = new Page<>(1,4);
+                blogMapper.selectPage(footerblogs,qw);
+                return  footerblogs;
+            }
+            current = 1;
+            size= 10;
+        }
+        QueryWrapper qw = new QueryWrapper();
+        qw.orderByDesc("create_time");
+        Page<Blog> page1 = new Page<>(current,size);
+        blogMapper.selectPage(page1,qw);
+        return page1;
     }
 
     /**
