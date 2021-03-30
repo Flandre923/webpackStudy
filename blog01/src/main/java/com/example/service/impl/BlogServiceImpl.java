@@ -1,8 +1,10 @@
 package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mapper.BlogMapper;
+import com.example.mapper.TagMapper;
 import com.example.pojo.Blog;
 import com.example.pojo.BlogToTag;
 import com.example.pojo.Tag;
@@ -10,6 +12,8 @@ import com.example.pojo.TagIdAndTagToBlogID;
 import com.example.pojo.params.PageSizeCurrent;
 import com.example.service.BlogService;
 import com.example.service.TagService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,34 +28,43 @@ public class BlogServiceImpl implements BlogService {
     TagService tagService;
 
     /**
-     * 获得所有blog
+     * 查询所有的博客并进行分页处理
      * @return
      */
     @Override
-    public Page getBlogs(PageSizeCurrent page) {
+    public PageInfo<Blog> getBlogs(PageSizeCurrent page) {
         int current=0,size=0;
-        if(page != null && page.getCurrent()!= null
-                && page.getPage_size()!= null
-                && page.getPage_size() > 0 && page.getCurrent()>0){
+        if(page != null
+            && page.getCurrent()!= null
+            && page.getPage_size()!= null
+            && page.getPage_size() > 0
+            && page.getCurrent()>0){
             current = page.getCurrent();
             size = page.getPage_size();
         }else{
             if(page==null || page.getCurrent() == null || page.getPage_size() ==null){
-                QueryWrapper qw = new QueryWrapper();
-                qw.orderByDesc("create_time");
-                System.out.println("============page===========");
-                Page<Blog> footerblogs = new Page<>(1,4);
-                blogMapper.selectPage(footerblogs,qw);
-                return  footerblogs;
+                return getBlogByPage(1,4);
             }
             current = 1;
             size= 10;
         }
-        QueryWrapper qw = new QueryWrapper();
-        qw.orderByDesc("create_time");
-        Page<Blog> page1 = new Page<>(current,size);
-        blogMapper.selectPage(page1,qw);
-        return page1;
+        return getBlogByPage(current,size);
+    }
+
+    /**
+     * 先查询到所有的blog然后分页 然后再查询blog下所以的tags
+     * @return
+     */
+    private PageInfo<Blog> getBlogByPage(Integer current,Integer size){
+        PageHelper.startPage(current,size);
+        List<Blog> bloglist = blogMapper.selectBlogs();
+        PageInfo<Blog> pageInfo = new PageInfo<>(bloglist);
+        for (Blog blog : pageInfo.getList()) {
+            List<Tag> tagsByBlogId = tagService.getTagsByBlogId(blog.getId());
+            blog.setTags(tagsByBlogId);
+        }
+        System.out.println(pageInfo);
+        return pageInfo;
     }
 
     /**

@@ -24,7 +24,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestAuthorizationEntryPoint restAuthorizationEntryPoint;
     @Autowired
     private RestfulAccessDenieHandler restfulAccessDenieHandler;
-
+    private String[] urllist = {"/login",
+    "/logout","/anime/anime",
+    "/blog/tags","/blog/artdate",
+    "/friends/fri","/index","/blog/**",
+    "/search/**","/comment/**"};
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -39,10 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login",
-                        "/logout","/anime/anime",
-                        "/blog/tags","/blog/artdate",
-                        "/friends/fri","/index","/blog/**","/search/**")
+                .antMatchers(urllist)
                 .permitAll()
                 .anyRequest()
                 .authenticated()

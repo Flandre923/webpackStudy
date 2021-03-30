@@ -17,4 +17,19 @@
         WHERE `tagid`=#{id}
     </select>
 
+    <select id="getTagsByBlogId" parameterType="int" resultType="com.example.pojo.Tag">
+        SELECT
+        tag.*
+        FROM
+        blog2tag
+        INNER JOIN
+        tag
+        ON
+        blog2tag.tagid = tag.id
+        INNER JOIN
+        blog
+        ON
+        blog2tag.blogid = blog.id
+        WHERE blog.id = #{id}
+    </select>
 </mapper>

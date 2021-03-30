@@ -20,4 +20,6 @@ public interface TagService {
 
     List<Blog> selectBlogbyTagId(int id);
 
+    public List<Tag> getTagsByBlogId(Integer id);
+
 }

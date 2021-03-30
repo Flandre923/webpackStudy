@@ -11,6 +11,6 @@ import java.util.Map;
 public interface TagMapper extends BaseMapper<Tag> {
     public List<Tag> getAllTag();
     int deleteBlog2Tag(int id);
-
+    public  List<Tag> getTagsByBlogId(int id);
     List<Integer> selectBlogbyTagId(int id);
 }

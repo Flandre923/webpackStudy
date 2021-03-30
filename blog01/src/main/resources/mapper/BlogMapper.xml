@@ -3,16 +3,15 @@
         PUBLIC "-//mybaits.org//DTD Mapper 3.0//EN"
         "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.BlogMapper">
+
 <!--    查询所有的blog-->
     <select id="selectBlogs" resultMap="Blogs2Tags">
-        SELECT b.`id` as bid,`title`,`summary`,`update_time`,`number`,
-        `create_time`,`read_time`,`picture`,`name`,t.`id` as tid
-        FROM blog b
-        INNER JOIN blog2tag bt
-        ON b.id = bt.`blogid`
-        INNER JOIN tag t
-        ON t.id = bt.`tagid`
-        order by `create_time` desc
+        SELECT
+        blog.*
+        FROM
+        blog
+        ORDER BY
+        create_time DESC
     </select>
 <!--    查询blog的时间-->
     <select id="selectBlogDate" resultType="Date">
@@ -78,17 +77,13 @@
 
     <resultMap id="Blogs2Tags" type="com.example.pojo.Blog">
         <result property="title" column="title"></result>
-        <result property="id" column="bid"></result>
+        <result property="id" column="id"></result>
         <result property="summary" column="summary"></result>
         <result property="updateTime" column="update_time"></result>
         <result property="number" column="number"></result>
         <result property="createTime" column="create_time"></result>
         <result property="readTime" column="read_time"></result>
         <result property="picture" column="picture"></result>
-        <collection property="tags" ofType="com.example.pojo.Tag" >
-            <result property="name" column="name"></result>
-            <result property="id" column="tid"></result>
-        </collection>
     </resultMap>
 
     <resultMap id="Blogs2Tags2" type="com.example.pojo.Blog">

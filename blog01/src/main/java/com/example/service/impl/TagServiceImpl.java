@@ -95,4 +95,15 @@ public class TagServiceImpl implements TagService {
         return blogs;
     }
 
+    /**
+     * 通过blogid查询tags
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Tag> getTagsByBlogId(Integer id) {
+        List<Tag> tagsByBlogId = tagMapper.getTagsByBlogId(id);
+        return tagsByBlogId;
+    }
+
 }

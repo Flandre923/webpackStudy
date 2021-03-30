@@ -13,7 +13,7 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Admin implements Serializable, UserDetails {
+public class Admin implements  UserDetails {
     private Integer id;
     private String username;
     private String password;
