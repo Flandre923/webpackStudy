@@ -33,4 +33,6 @@ public interface BlogMapper extends BaseMapper<Blog> {
     int removeBlog2Tag(int tagid);
 
     int deleteBlog2Tag(int id);
+
+    List<Blog> getIdAndTitleList();
 }

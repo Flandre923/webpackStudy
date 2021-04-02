@@ -23,4 +23,6 @@ public interface CommentService {
     int countByPageAndIsPublished(Integer page,Long blogId);
 
     void saveComment(com.example.pojo.params.Ccomment ccomment);
+
+    List<Comment> getListByPageAndParentCommentId(Integer page,Long blogId,Long parentCommentId);
 }

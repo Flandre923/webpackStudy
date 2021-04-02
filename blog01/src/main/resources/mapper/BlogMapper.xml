@@ -63,6 +63,15 @@
         delete from blog2tag where blogid=#{id}
     </delete>
 
+    <resultMap id="blogIdAndTitle" type="com.example.pojo.params.BlogIdAndTitle">
+        <id property="id" column="id" />
+        <result property="title" column="title"/>
+    </resultMap>
+<!--    查询所有的blog的title和id-->
+    <select id="getIdAndTitleList" resultMap="blogIdAndTitle">
+        SELECT id,title from blog order by create_time desc
+    </select>
+
     <resultMap id="selectBlog2TagList" type="com.example.pojo.BlogToTag">
         <result property="blogid" column="blogid"></result>
         <collection property="list" ofType="com.example.pojo.TagIdAndTagToBlogID">

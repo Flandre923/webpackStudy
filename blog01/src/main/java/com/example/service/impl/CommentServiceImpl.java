@@ -53,7 +53,7 @@ public class CommentServiceImpl implements CommentService {
             List<PageComment> replyComments = getPageCommentListByPageAndParentCommentId(page,blogId,c.getId());
             c.setReplyComments(replyComments);
         }
-        return null;
+        return comments;
     }
     /**
      * 通过id递归查询子评论
@@ -115,11 +115,19 @@ public class CommentServiceImpl implements CommentService {
 
     }
 
+    /**
+     * 通过blogid删除
+     * @param Blogid
+     */
     @Override
     public void deleteCommentByBlogId(Long Blogid) {
         commentMapper.deleteCommentById(Blogid);
     }
 
+    /**
+     * 更新comment
+     * @param comment
+     */
     @Override
     public void updateComment(Comment comment) {
         if(commentMapper.updateComment(comment)!=1){
@@ -128,11 +136,21 @@ public class CommentServiceImpl implements CommentService {
 
     }
 
+    /**
+     * 统计
+     * @param page
+     * @param blogId
+     * @return
+     */
     @Override
     public int countByPageAndIsPublished(Integer page, Long blogId) {
         return commentMapper.countByPageAndIsPublished(page, blogId);
     }
 
+    /**
+     * 保存comment
+     * @param ccomment
+     */
     @Override
     public void saveComment(Ccomment ccomment) {
         if(commentMapper.saveComment(ccomment) != 1 ){
@@ -140,5 +158,22 @@ public class CommentServiceImpl implements CommentService {
         }
 
     }
-    
+
+    /**
+     * 递归查询所有的评论
+     * @param page
+     * @param blogId
+     * @param parentCommentId
+     * @return
+     */
+    @Override
+    public List<Comment> getListByPageAndParentCommentId(Integer page, Long blogId, Long parentCommentId) {
+        List<Comment> comments = commentMapper.getListByPageAndParentCommentId(page,blogId,parentCommentId);
+        for (Comment comment : comments) {
+            List<Comment> comments1 = getListByPageAndParentCommentId(page, blogId, comment.getId());
+            comment.setReplyComments(comments1);
+        }
+        return comments;
+    }
+
 }

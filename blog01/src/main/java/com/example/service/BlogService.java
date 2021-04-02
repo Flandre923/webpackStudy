@@ -25,4 +25,6 @@ public interface BlogService {
     public int insertBlog(Blog blogt, List list);
 
     public int deteleBlogById(int id);
+
+    public List<Blog> getIdAndTitleList();
 }

@@ -220,5 +220,14 @@ public class BlogServiceImpl implements BlogService {
         return 1;
     }
 
+    /**
+     * 通过查询所有的blogid和title
+     * @return
+     */
+    @Override
+    public List<Blog> getIdAndTitleList() {
+        return blogMapper.getIdAndTitleList();
+    }
+
 
 }
